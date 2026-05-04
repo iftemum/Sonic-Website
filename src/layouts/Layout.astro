@@ -1,0 +1,228 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  image?: string;
+}
+
+const {
+  title = 'Sonic Window Cleaning | Crystal Clear Exteriors in Saskatoon & Area',
+  description = 'Professional window, gutter, siding and pressure-washing across Saskatoon, Warman, Martensville, Osler, Dalmeny and 25+ surrounding communities. Fast quotes, spotless finish, locally owned since 2020.',
+  canonical = Astro.url.href,
+  image = '/og-image.jpg',
+} = Astro.props;
+
+const siteName = 'Sonic Window Cleaning';
+const ogImage = new URL(image, Astro.site ?? Astro.url).href;
+
+const serviceAreas = [
+  'Saskatoon',
+  'Warman',
+  'Martensville',
+  'Osler',
+  'Dalmeny',
+  'Langham',
+  'Delisle',
+  'Vanscoy',
+  'Clavet',
+  'Dundurn',
+  'Aberdeen',
+  'Allan',
+  'Asquith',
+  'Borden',
+  'Bradwell',
+  'Colonsay',
+  'Cudworth',
+  'Duck Lake',
+  'Hague',
+  'Hanley',
+  'Hepburn',
+  'Kenaston',
+  'Radisson',
+  'Rosthern',
+  'Viscount',
+  'Wakaw',
+  'Waldheim',
+];
+
+const businessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: siteName,
+  image: ogImage,
+  description,
+  url: canonical,
+  priceRange: '$$',
+  foundingDate: '2020',
+  areaServed: [
+    ...serviceAreas.map((name) => ({ '@type': 'City', name })),
+    { '@type': 'AdministrativeArea', name: 'Saskatchewan' },
+  ],
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Saskatoon',
+    addressRegion: 'SK',
+    addressCountry: 'CA',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 52.1332,
+    longitude: -106.67,
+  },
+  serviceType: [
+    'Window Cleaning',
+    'Gutter Cleaning',
+    'Siding Cleaning',
+    'Pressure Washing',
+    'Driveway Cleaning',
+  ],
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Exterior Cleaning Services',
+    itemListElement: [
+      {
+        '@type': 'Offer',
+        itemOffered: { '@type': 'Service', name: 'Window Cleaning' },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: { '@type': 'Service', name: 'Gutter Cleaning' },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: { '@type': 'Service', name: 'Siding Cleaning' },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: { '@type': 'Service', name: 'Pressure Washing' },
+      },
+    ],
+  },
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#0b1230" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta
+      name="keywords"
+      content={`window cleaning Saskatoon, gutter cleaning, pressure washing, siding cleaning, ${serviceAreas.join(', ')}`}
+    />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+
+    <meta name="geo.region" content="CA-SK" />
+    <meta name="geo.placename" content="Saskatoon" />
+    <meta name="geo.position" content="52.1332;-106.6700" />
+    <meta name="ICBM" content="52.1332, -106.6700" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="en_CA" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+
+    <link
+      rel="preconnect"
+      href="https://pub-bb295725be3b4a64b076d16af5179956.r2.dev"
+      crossorigin
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    />
+
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(businessSchema)}
+    />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <main id="main">
+      <slot />
+    </main>
+  </body>
+</html>
+
+<style is:global>
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+    background: #0b1230;
+    color: #fff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family:
+      'Inter',
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      'Segoe UI',
+      Roboto,
+      Helvetica,
+      Arial,
+      sans-serif;
+  }
+
+  img,
+  video {
+    max-width: 100%;
+    display: block;
+  }
+
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    background: #fff;
+    color: #0b1230;
+    padding: 0.75rem 1rem;
+    border-radius: 0 0 8px 0;
+    z-index: 100;
+  }
+
+  .skip-link:focus {
+    left: 0;
+  }
+
+  :focus-visible {
+    outline: 2px solid #ff5a47;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+</style>
