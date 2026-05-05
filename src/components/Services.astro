@@ -1,0 +1,659 @@
+---
+const R2_BASE =
+  'https://pub-bb295725be3b4a64b076d16af5179956.r2.dev/Sonic_compressed_assets';
+
+const services = [
+  {
+    id: 'window-cleaning',
+    name: 'Window Cleaning',
+    title: 'Window Cleaning',
+    tagline:
+      'Streak-free, spot-free, edge-to-edge. Interior and exterior, residential and commercial — we leave glass invisible.',
+    points: [
+      'Interior + exterior glass',
+      'Screens hand-washed',
+      'Tracks & sills wiped',
+      'Hard-water stain treatment',
+    ],
+    video: `${R2_BASE}/window_cleaning.mp4`,
+    videoAlt:
+      'Sonic technician hand-washing residential windows in Saskatoon — purified-water pole reaches a second-storey pane, leaving streak-free glass.',
+    poster: '',
+  },
+  {
+    id: 'pressure-washing',
+    name: 'Pressure Washing',
+    title: 'Pressure Washing',
+    tagline:
+      'Driveways, patios, sidewalks and decks restored. Adjustable pressure and surface cleaners that lift dirt without etching.',
+    points: [
+      'Concrete & paver driveways',
+      'Backyard patios & decks',
+      'Moss, oil & rust treatment',
+      'Soft-wash safe for delicate surfaces',
+    ],
+    video: '',
+    videoAlt:
+      'Sonic crew pressure washing a Saskatoon concrete driveway — surface cleaner lifting embedded dirt and moss in a single pass.',
+    poster: '',
+  },
+  {
+    id: 'gutter-cleaning',
+    name: 'Gutter Cleaning',
+    title: 'Gutter Cleaning',
+    tagline:
+      'Hand-cleared, flushed, and inspected. We pull every leaf, seed pod and shingle granule so your eaves drain like new.',
+    points: [
+      'Full hand-clearing of debris',
+      'Downspouts flushed & tested',
+      'Gutter exterior wipe-down',
+      'Eaves photo report on request',
+    ],
+    video: `${R2_BASE}/Gutter_cleaning.mp4`,
+    videoAlt:
+      'Sonic technician hand-cleaning eavestroughs on a Saskatoon home — debris being cleared and downspouts flushed.',
+    poster: '',
+  },
+  {
+    id: 'siding-cleaning',
+    name: 'Siding Cleaning',
+    title: 'Siding & House Wash',
+    tagline:
+      'Vinyl, stucco, brick and Hardie — softly washed top to bottom. Removes prairie dust, web build-up and construction grime.',
+    points: [
+      'Vinyl, stucco & Hardie siding',
+      'Doors, garages & soffits',
+      'Chemical or non-chemical options',
+      'Pairs perfectly with windows',
+    ],
+    video: `${R2_BASE}/Siding_cleaning.mp4`,
+    videoAlt:
+      'Sonic crew soft-washing vinyl siding on a Saskatoon home — gentle low-pressure rinse removing dust and web build-up.',
+    poster: '',
+  },
+];
+---
+
+<section
+  class="services"
+  id="services"
+  aria-labelledby="services-heading"
+>
+  <div class="services__intro">
+    <p class="services__eyebrow">
+      <span class="services__dot" aria-hidden="true"></span>
+      What we do
+    </p>
+    <h2 id="services-heading" class="services__heading">
+      Saskatoon's exterior <span class="services__heading-accent">cleaning specialists.</span>
+    </h2>
+    <p class="services__lede">
+      Four core services across Saskatoon and 25+ surrounding communities — built around
+      safe equipment, purified-water systems, and finishes that hold up to prairie weather.
+    </p>
+  </div>
+
+  <div class="services__tabs" role="tablist" aria-label="Service categories">
+    {services.map((s, i) => (
+      <button
+        class="services__tab"
+        role="tab"
+        type="button"
+        id={`tab-${s.id}`}
+        aria-controls={`panel-${s.id}`}
+        aria-selected={i === 0 ? 'true' : 'false'}
+        tabindex={i === 0 ? 0 : -1}
+        data-index={i}
+      >
+        <span class="services__tab-num">0{i + 1}</span>
+        <span class="services__tab-name">{s.name}</span>
+      </button>
+    ))}
+  </div>
+
+  <div class="services__stage">
+    {services.map((service, i) => (
+      <article
+        class="services__panel"
+        id={`panel-${service.id}`}
+        role="tabpanel"
+        aria-labelledby={`tab-${service.id}`}
+        data-active={i === 0 ? 'true' : 'false'}
+        hidden={i !== 0}
+      >
+        <div class="services__media">
+          {service.video ? (
+            <video
+              class="services__video"
+              data-src={service.video}
+              muted
+              loop
+              playsinline
+              preload="none"
+              aria-label={service.videoAlt}
+            ></video>
+          ) : (
+            <div
+              class="services__placeholder"
+              role="img"
+              aria-label={service.videoAlt}
+            >
+              <span class="services__placeholder-tag">Coming soon</span>
+            </div>
+          )}
+          <span class="visually-hidden">{service.videoAlt}</span>
+        </div>
+
+        <div class="services__content">
+          <p class="services__counter" aria-hidden="true">
+            <span class="services__counter-current">0{i + 1}</span>
+            <span class="services__counter-divider"></span>
+            <span class="services__counter-total">0{services.length}</span>
+          </p>
+
+          <h3 class="services__title">{service.title}</h3>
+          <p class="services__tagline">{service.tagline}</p>
+
+          <ul class="services__list">
+            {service.points.map((p) => (
+              <li>
+                <span class="services__check" aria-hidden="true">
+                  <svg viewBox="0 0 16 16" width="14" height="14" fill="none">
+                    <path
+                      d="M3.5 8.5l3 3 6-6"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                  </svg>
+                </span>
+                <span>{p}</span>
+              </li>
+            ))}
+          </ul>
+
+          <a href="#quote" class="services__cta">
+            Quote this service
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
+
+<script>
+  const tabs = document.querySelectorAll<HTMLButtonElement>(
+    '.services__tab'
+  );
+  const panels = document.querySelectorAll<HTMLElement>('.services__panel');
+
+  function activate(index: number) {
+    tabs.forEach((t, i) => {
+      const selected = i === index;
+      t.setAttribute('aria-selected', selected ? 'true' : 'false');
+      t.tabIndex = selected ? 0 : -1;
+    });
+
+    panels.forEach((panel, i) => {
+      const active = i === index;
+      panel.dataset.active = active ? 'true' : 'false';
+      if (active) panel.removeAttribute('hidden');
+      else panel.setAttribute('hidden', '');
+
+      const video = panel.querySelector<HTMLVideoElement>('.services__video');
+      if (!video) return;
+
+      if (active) {
+        const src = video.dataset.src;
+        if (src && !video.src) {
+          video.src = src;
+        }
+        const playPromise = video.play();
+        if (playPromise) playPromise.catch(() => {});
+      } else {
+        video.pause();
+      }
+    });
+  }
+
+  tabs.forEach((tab, i) => {
+    tab.addEventListener('click', () => activate(i));
+    tab.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        e.preventDefault();
+        const next = (i + 1) % tabs.length;
+        tabs[next].focus();
+        activate(next);
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        const prev = (i - 1 + tabs.length) % tabs.length;
+        tabs[prev].focus();
+        activate(prev);
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        tabs[0].focus();
+        activate(0);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        tabs[tabs.length - 1].focus();
+        activate(tabs.length - 1);
+      }
+    });
+  });
+
+  // Lazy-start the first video once the section enters the viewport
+  const stage = document.querySelector<HTMLElement>('.services__stage');
+  if (stage) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const activePanel = document.querySelector<HTMLElement>(
+            '.services__panel[data-active="true"]'
+          );
+          const video = activePanel?.querySelector<HTMLVideoElement>(
+            '.services__video'
+          );
+          if (video && video.dataset.src && !video.src) {
+            video.src = video.dataset.src;
+            video.play().catch(() => {});
+          }
+          io.disconnect();
+        });
+      },
+      { threshold: 0.2 }
+    );
+    io.observe(stage);
+  }
+</script>
+
+<style>
+  .services {
+    --navy: #0b1230;
+    --navy-2: #111d44;
+    --accent: #2563eb;
+    --ink: #0a0f24;
+    --muted: #5b6584;
+    --line: rgba(11, 18, 48, 0.08);
+
+    position: relative;
+    background: #f6f7fb;
+    color: var(--ink);
+    padding: clamp(4rem, 9vw, 7.5rem) clamp(1.5rem, 5vw, 4rem);
+    font-family:
+      'Inter',
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      'Segoe UI',
+      Roboto,
+      Helvetica,
+      Arial,
+      sans-serif;
+  }
+
+  .services__intro {
+    max-width: 56rem;
+    margin: 0 auto clamp(2.5rem, 5vw, 4rem);
+    text-align: center;
+  }
+
+  .services__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin: 0 0 1.25rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .services__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: #ff4d3d;
+    box-shadow: 0 0 12px rgba(255, 77, 61, 0.6);
+  }
+
+  .services__heading {
+    margin: 0 0 1.25rem;
+    font-size: clamp(2rem, 5.4vw, 3.75rem);
+    line-height: 1;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--navy);
+  }
+
+  .services__heading-accent {
+    background: linear-gradient(180deg, #ff5a47 0%, #d6321f 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .services__lede {
+    margin: 0 auto;
+    max-width: 42rem;
+    font-size: clamp(1rem, 1.2vw, 1.1rem);
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  /* Tabs */
+  .services__tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 0 auto clamp(2rem, 4vw, 3rem);
+    max-width: 72rem;
+    padding: 0.4rem;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    box-shadow: 0 10px 30px -20px rgba(11, 18, 48, 0.25);
+    width: fit-content;
+  }
+
+  .services__tab {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.55rem;
+    padding: 0.85rem 1.4rem;
+    border: 0;
+    background: transparent;
+    border-radius: 999px;
+    color: var(--muted);
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+      background-color 180ms ease,
+      color 180ms ease,
+      transform 180ms ease;
+  }
+
+  .services__tab:hover {
+    color: var(--navy);
+  }
+
+  .services__tab:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .services__tab[aria-selected='true'] {
+    background: var(--navy);
+    color: #fff;
+  }
+
+  .services__tab-num {
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo,
+      monospace;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    opacity: 0.7;
+  }
+
+  .services__tab[aria-selected='true'] .services__tab-num {
+    color: #ff8a7a;
+    opacity: 1;
+  }
+
+  /* Stage / panel */
+  .services__stage {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px -40px rgba(11, 18, 48, 0.35);
+  }
+
+  .services__panel {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    min-height: clamp(420px, 60vh, 620px);
+  }
+
+  .services__panel[hidden] {
+    display: none;
+  }
+
+  /* Media */
+  .services__media {
+    position: relative;
+    background: var(--navy);
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .services__media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(11, 18, 48, 0) 60%,
+      rgba(11, 18, 48, 0.45) 100%
+    );
+    pointer-events: none;
+  }
+
+  .services__video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .services__placeholder {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: var(--navy);
+    background-image: repeating-linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.04) 0,
+      rgba(255, 255, 255, 0.04) 14px,
+      transparent 14px,
+      transparent 28px
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .services__placeholder-tag {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.65);
+    padding: 0.55rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 999px;
+    backdrop-filter: blur(6px);
+  }
+
+  /* Content */
+  .services__content {
+    padding: clamp(2rem, 4vw, 3.5rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .services__counter {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.85rem;
+    margin: 0;
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo,
+      monospace;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+  }
+
+  .services__counter-current {
+    color: var(--accent);
+  }
+
+  .services__counter-total {
+    color: var(--muted);
+    opacity: 0.7;
+  }
+
+  .services__counter-divider {
+    width: 4rem;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      var(--accent),
+      rgba(37, 99, 235, 0)
+    );
+  }
+
+  .services__title {
+    margin: 0;
+    font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+    line-height: 0.98;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--navy);
+  }
+
+  .services__tagline {
+    margin: 0;
+    font-size: clamp(1rem, 1.2vw, 1.1rem);
+    line-height: 1.6;
+    color: #3d465f;
+    max-width: 32rem;
+  }
+
+  .services__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .services__list li {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    font-size: 1rem;
+    color: var(--ink);
+  }
+
+  .services__check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    flex: 0 0 auto;
+    border-radius: 999px;
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .services__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 0.5rem;
+    color: var(--accent);
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 0.25rem;
+    align-self: flex-start;
+    transition:
+      gap 180ms ease,
+      color 180ms ease,
+      border-color 180ms ease;
+  }
+
+  .services__cta:hover,
+  .services__cta:focus-visible {
+    gap: 0.9rem;
+    color: var(--navy);
+    border-color: var(--navy);
+  }
+
+  /* A11y helpers */
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Responsive */
+  @media (max-width: 880px) {
+    .services__panel {
+      grid-template-columns: 1fr;
+      min-height: 0;
+    }
+
+    .services__media {
+      aspect-ratio: 4 / 3;
+    }
+
+    .services__tabs {
+      width: 100%;
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      border-radius: 18px;
+      scrollbar-width: none;
+    }
+
+    .services__tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .services__tab {
+      flex: 0 0 auto;
+      padding: 0.7rem 1.1rem;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .services__tab-name {
+      font-size: 0.9rem;
+    }
+    .services__counter-divider {
+      width: 2.5rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .services__video {
+      display: none;
+    }
+    .services__cta {
+      transition: none;
+    }
+  }
+</style>

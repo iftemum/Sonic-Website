@@ -1,0 +1,191 @@
+---
+const row1 = ['Warman', 'Martensville', 'Osler', 'Dalmeny', 'Langham', 'Delisle', 'Vanscoy', 'Clavet', 'Dundurn', 'Aberdeen'];
+const row2 = ['Allan', 'Asquith', 'Borden', 'Bradwell', 'Colonsay', 'Cudworth', 'Duck Lake', 'Hague', 'Hanley', 'Hepburn', 'Kenaston', 'Radisson', 'Rosthern', 'Viscount', 'Wakaw', 'Waldheim'];
+---
+
+<section id="service-area" class="sa" aria-label="Service area">
+  <div class="sa__head">
+    <p class="sa__eyebrow">Service Area</p>
+    <h2 class="sa__title">Saskatoon &amp; 25+ surrounding<br />communities.</h2>
+    <p class="sa__sub">
+      If you're within an hour of the city, we're probably in your area this
+      week. Don't see your town? Just ask.
+    </p>
+  </div>
+
+  <div class="sa__ticker-wrap" aria-hidden="true">
+    <div class="sa__track sa__track--1">
+      {[...row1, ...row1].map((city) => (
+        <span class="sa__item">
+          <span class="sa__dot sa__dot--blue"></span>
+          {city}
+        </span>
+      ))}
+    </div>
+    <div class="sa__track sa__track--2">
+      {[...row2, ...row2].map((city) => (
+        <span class="sa__item">
+          <span class="sa__dot sa__dot--red"></span>
+          {city}
+        </span>
+      ))}
+    </div>
+  </div>
+
+  <div class="sa__foot">
+    <a href="#quote" class="sa__link">Don't see your town? Send us a message &rarr;</a>
+  </div>
+</section>
+
+<style>
+  .sa {
+    background: #0b1230;
+    padding: clamp(5rem, 10vh, 8rem) 0 clamp(4rem, 8vh, 6rem);
+    overflow: hidden;
+  }
+
+  /* Head */
+  .sa__head {
+    text-align: center;
+    padding: 0 clamp(1.5rem, 5vw, 4rem);
+    margin-bottom: clamp(3rem, 6vh, 5rem);
+  }
+
+  .sa__eyebrow {
+    margin: 0 0 1.25rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .sa__title {
+    margin: 0 0 1.5rem;
+    font-size: clamp(2.75rem, 7vw, 6.5rem);
+    font-weight: 800;
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    color: #fff;
+  }
+
+  .sa__sub {
+    max-width: 36rem;
+    margin: 0 auto;
+    font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  /* Ticker */
+  .sa__ticker-wrap {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 12%,
+      black 88%,
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 12%,
+      black 88%,
+      transparent 100%
+    );
+  }
+
+  .sa__track {
+    display: flex;
+    width: max-content;
+    align-items: center;
+    padding: 0.25rem 0;
+    will-change: transform;
+  }
+
+  .sa__track--1 {
+    animation: ticker-left 28s linear infinite;
+    font-size: clamp(2rem, 4.5vw, 4.5rem);
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.65);
+    letter-spacing: -0.02em;
+  }
+
+  .sa__track--2 {
+    animation: ticker-right 22s linear infinite;
+    font-size: clamp(3rem, 6.5vw, 7rem);
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.03em;
+  }
+
+  .sa__item {
+    display: inline-flex;
+    align-items: center;
+    gap: clamp(0.6rem, 1.5vw, 1.25rem);
+    padding: 0 clamp(0.75rem, 2vw, 1.75rem);
+    white-space: nowrap;
+  }
+
+  .sa__dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .sa__dot--blue {
+    background: #4a7cf8;
+  }
+
+  .sa__dot--red {
+    background: #ff4d3d;
+    box-shadow: 0 0 8px rgba(255, 77, 61, 0.6);
+  }
+
+  /* Footer link */
+  .sa__foot {
+    text-align: center;
+    margin-top: clamp(2.5rem, 5vh, 4rem);
+    padding: 0 clamp(1.5rem, 5vw, 4rem);
+  }
+
+  .sa__link {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: rgba(255, 255, 255, 0.25);
+    transition: color 160ms ease, text-decoration-color 160ms ease;
+  }
+
+  .sa__link:hover,
+  .sa__link:focus-visible {
+    color: #fff;
+    text-decoration-color: rgba(255, 255, 255, 0.6);
+  }
+
+  /* Animations */
+  @keyframes ticker-left {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  @keyframes ticker-right {
+    from { transform: translateX(-50%); }
+    to   { transform: translateX(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sa__track {
+      animation: none;
+    }
+  }
+</style>

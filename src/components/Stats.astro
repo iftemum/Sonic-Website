@@ -1,0 +1,137 @@
+---
+const stats = [
+  { value: 250, suffix: '+', label: 'Customers Satisfied' },
+  { value: 3,   suffix: '+', label: 'Years in Business' },
+  { value: 10,  suffix: '+', label: 'Commercial Properties' },
+  { value: 25,  suffix: '+', label: 'Communities Served' },
+  { value: 3000,suffix: '+', label: 'Windows Cleaned' },
+];
+---
+
+<section class="stats" aria-label="Our numbers">
+  {stats.map(({ value, suffix, label }) => (
+    <div class="stats__item">
+      <span class="stats__number" data-target={value} data-suffix={suffix}>0{suffix}</span>
+      <span class="stats__label">{label}</span>
+    </div>
+  ))}
+</section>
+
+<script>
+  const items = document.querySelectorAll<HTMLElement>('.stats__number');
+
+  const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
+
+  function animateCount(el: HTMLElement) {
+    const target = Number(el.dataset.target);
+    const suffix = el.dataset.suffix ?? '';
+    const duration = 1600;
+    const start = performance.now();
+
+    function tick(now: number) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const current = Math.round(easeOut(progress) * target);
+      el.textContent = (target >= 1000 ? current.toLocaleString() : String(current)) + suffix;
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+
+    requestAnimationFrame(tick);
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          animateCount(entry.target as HTMLElement);
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.3 }
+  );
+
+  items.forEach((el) => observer.observe(el));
+</script>
+
+<style>
+  .stats {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    background: #111827;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    font-family:
+      'Inter',
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      sans-serif;
+  }
+
+  .stats__item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    padding: 2.5rem 1rem;
+    position: relative;
+  }
+
+  .stats__item + .stats__item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 20%;
+    height: 60%;
+    width: 1px;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .stats__number {
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    background: linear-gradient(180deg, #ff5a47 0%, #d6321f 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .stats__label {
+    font-size: clamp(0.75rem, 1.1vw, 0.9rem);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: rgba(255, 255, 255, 0.55);
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 640px) {
+    .stats {
+      flex-wrap: wrap;
+    }
+
+    .stats__item {
+      flex: 0 0 50%;
+      padding: 2rem 1rem;
+    }
+
+    .stats__item:nth-child(5) {
+      flex: 0 0 100%;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .stats__item + .stats__item::before {
+      display: none;
+    }
+
+    .stats__item:nth-child(odd):not(:first-child) {
+      border-left: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  }
+</style>
