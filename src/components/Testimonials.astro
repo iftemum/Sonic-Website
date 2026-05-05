@@ -1,0 +1,278 @@
+---
+const reviews = [
+  {
+    initials: 'RF',
+    name: 'R F.',
+    role: 'Home Owner',
+    location: '',
+    body: "Very professional. Prompt. Reasonable price. Quick to respond and easy to communicate with. This is the second year we've worked with them and have been very pleased. Included our windows and deck.",
+  },
+  {
+    initials: 'SS',
+    name: 'Susan S.',
+    role: 'Home Owner',
+    location: 'Saskatoon, SK',
+    body: "Took a chance on having Liam do our windows and I'm pretty happy with the job his company did. Communication was excellent including scheduling and, as we were not home, pictures were sent showing the job. His purified water cleaning system was as good as promised and he cleaned the below ground window wells and the casings around the rest of the windows. They missed a few windows but came back within an hour and redid them no questions asked. Excellent service.",
+  },
+  {
+    initials: 'MM',
+    name: 'Maureen M.',
+    role: 'Home Owner',
+    location: 'Saskatoon, SK',
+    body: "Had our windows done by these young men for the second season and couldn't be happier. Quick, thorough and meticulous in their workmanship. Friendly and helpful young men. We will certainly have them back again.",
+  },
+  {
+    initials: 'RD',
+    name: 'Randy D.',
+    role: 'Home Owner',
+    location: 'Saskatoon, SK',
+    body: "We had Sonic over to clean our windows on a walk-out basement style home. Three young fellows arrived with all the required equipment and ready to do the job. They worked quickly and efficiently, taking care not to damage any young plants in the flower gardens. These workers were extremely courteous and polite. We would definitely use their services again!",
+  },
+];
+---
+
+<section
+  class="reviews"
+  id="reviews"
+  aria-labelledby="reviews-heading"
+  itemscope
+  itemtype="https://schema.org/LocalBusiness"
+>
+  <meta itemprop="name" content="Sonic Window Cleaning" />
+
+  <div class="reviews__intro">
+    <p class="reviews__eyebrow">
+      <span class="reviews__dot" aria-hidden="true"></span>
+      What clients say
+    </p>
+    <h2 id="reviews-heading" class="reviews__heading">
+      Trusted by Saskatoon<br class="reviews__br" />
+      <span class="reviews__heading-accent">homeowners.</span>
+    </h2>
+    <p class="reviews__lede">
+      Real feedback from real clients across Saskatoon and surrounding communities — the kind that keeps them coming back season after season.
+    </p>
+  </div>
+
+  <ol class="reviews__grid" role="list">
+    {reviews.map((r) => (
+      <li
+        class="reviews__card"
+        itemscope
+        itemtype="https://schema.org/Review"
+      >
+        <meta itemprop="author" content={r.name} />
+        <span class="reviews__quote" aria-hidden="true">
+          <svg width="32" height="24" viewBox="0 0 32 24" fill="none" aria-hidden="true">
+            <path d="M0 24V14.4C0 6.4 4.8 1.6 14.4 0l1.6 2.4C10.667 3.6 8 6.133 7.2 10H13.6V24H0ZM18.4 24V14.4C18.4 6.4 23.2 1.6 32.8 0l1.6 2.4C29.067 3.6 26.4 6.133 25.6 10H32V24H18.4Z" fill="currentColor"/>
+          </svg>
+        </span>
+        <blockquote class="reviews__body" itemprop="reviewBody">
+          {r.body}
+        </blockquote>
+        <footer class="reviews__footer">
+          <span class="reviews__avatar" aria-hidden="true">{r.initials}</span>
+          <div class="reviews__meta">
+            <span class="reviews__name" itemprop="author">{r.name}</span>
+            <span class="reviews__role">
+              {r.role}{r.location ? ` · ${r.location}` : ''}
+            </span>
+          </div>
+        </footer>
+      </li>
+    ))}
+  </ol>
+</section>
+
+<style>
+  .reviews {
+    --navy: #0b1230;
+    --navy-2: #111d44;
+    --accent: #2563eb;
+    --ink: #0a0f24;
+    --muted: #5b6584;
+    --line: rgba(11, 18, 48, 0.08);
+    --quote-color: #d1d9f0;
+
+    background: #fff;
+    color: var(--ink);
+    padding: clamp(4rem, 9vw, 7.5rem) clamp(1.5rem, 5vw, 4rem);
+    font-family:
+      'Inter',
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      'Segoe UI',
+      Roboto,
+      Helvetica,
+      Arial,
+      sans-serif;
+  }
+
+  .reviews__intro {
+    max-width: 56rem;
+    margin: 0 auto clamp(2.5rem, 5vw, 4rem);
+    text-align: center;
+  }
+
+  .reviews__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin: 0 0 1.25rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .reviews__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: #ff4d3d;
+    box-shadow: 0 0 12px rgba(255, 77, 61, 0.6);
+    flex-shrink: 0;
+  }
+
+  .reviews__heading {
+    margin: 0 0 1.25rem;
+    font-size: clamp(2rem, 5.4vw, 3.75rem);
+    line-height: 1.05;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--navy);
+  }
+
+  .reviews__br {
+    display: none;
+  }
+
+  @media (min-width: 640px) {
+    .reviews__br {
+      display: block;
+    }
+  }
+
+  .reviews__heading-accent {
+    background: linear-gradient(180deg, #ff5a47 0%, #d6321f 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .reviews__lede {
+    margin: 0 auto;
+    max-width: 42rem;
+    font-size: clamp(1rem, 1.2vw, 1.1rem);
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  /* Grid */
+  .reviews__grid {
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    max-width: 1200px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+
+  /* Card */
+  .reviews__card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+    background: #f6f7fb;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    transition: box-shadow 200ms ease, transform 200ms ease;
+  }
+
+  .reviews__card:hover {
+    box-shadow: 0 12px 40px -20px rgba(11, 18, 48, 0.18);
+    transform: translateY(-2px);
+  }
+
+  /* Quote mark */
+  .reviews__quote {
+    color: var(--quote-color);
+    display: block;
+    line-height: 1;
+  }
+
+  /* Body */
+  .reviews__body {
+    margin: 0;
+    padding: 0;
+    font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+    line-height: 1.7;
+    color: #2f3952;
+    flex: 1;
+    quotes: none;
+  }
+
+  /* Footer */
+  .reviews__footer {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    margin-top: auto;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .reviews__avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: 999px;
+    background: var(--navy);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+
+  .reviews__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .reviews__name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.2;
+  }
+
+  .reviews__role {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    letter-spacing: 0.03em;
+  }
+
+  /* Responsive */
+  @media (max-width: 720px) {
+    .reviews__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reviews__card {
+      transition: none;
+    }
+  }
+</style>

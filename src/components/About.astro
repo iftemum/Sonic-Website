@@ -1,0 +1,230 @@
+---
+const values = [
+  {
+    heading: 'Communication first.',
+    body: 'We prioritize every question and concern — before, during, and after the job.',
+  },
+  {
+    heading: 'Safety always.',
+    body: 'Every service follows safe practices so your home and our crew are protected.',
+  },
+];
+---
+
+<section id="about" class="about" aria-labelledby="about-heading">
+
+  <!-- Intro -->
+  <div class="about__intro">
+    <p class="about__eyebrow">About Us</p>
+    <h2 id="about-heading" class="about__heading">
+      Young entrepreneurs.<br />
+      <span class="about__heading-accent">Hardworking hearts.</span>
+    </h2>
+    <p class="about__lede">
+      We specialize in both exterior and interior window cleaning, along with
+      gutters, pressure washing, and siding maintenance. We're young
+      entrepreneurs with a passion for connecting with great people and
+      communities.
+    </p>
+  </div>
+
+  <!-- Story split -->
+  <div class="about__story">
+    <div class="about__story-label" aria-hidden="true">
+      <span class="about__story-word about__story-word--muted">Our</span>
+      <span class="about__story-word">Story</span>
+    </div>
+
+    <div class="about__story-text">
+      <p class="about__story-p about__story-p--lead">
+        We started as college and high school students looking to earn some
+        extra cash to get us through schooling.
+      </p>
+      <p class="about__story-p">
+        We've now grown into a workplace for students to learn communication
+        skills and customer service, all while making some good friends along
+        the way.
+      </p>
+    </div>
+  </div>
+
+  <!-- Value cards -->
+  <div class="about__values">
+    {values.map((v) => (
+      <div class="about__card">
+        <span class="about__card-dot" aria-hidden="true"></span>
+        <h3 class="about__card-heading">{v.heading}</h3>
+        <p class="about__card-body">{v.body}</p>
+      </div>
+    ))}
+  </div>
+
+</section>
+
+<style>
+  .about {
+    background: #0d1535;
+    color: #fff;
+    padding: clamp(5rem, 10vh, 8rem) clamp(1.5rem, 5vw, 4rem) clamp(4rem, 8vh, 7rem);
+    font-family:
+      'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
+      Helvetica, Arial, sans-serif;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  /* Intro */
+  .about__intro {
+    max-width: 54rem;
+    margin: 0 auto clamp(4rem, 8vw, 7rem);
+    text-align: center;
+  }
+
+  .about__eyebrow {
+    margin: 0 0 1.25rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .about__heading {
+    margin: 0 0 1.5rem;
+    font-size: clamp(2.75rem, 6.5vw, 5.5rem);
+    font-weight: 800;
+    line-height: 1.0;
+    letter-spacing: -0.035em;
+    color: #fff;
+  }
+
+  .about__heading-accent {
+    background: linear-gradient(180deg, #ff5a47 0%, #d6321f 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .about__lede {
+    margin: 0 auto;
+    max-width: 38rem;
+    font-size: clamp(1rem, 1.3vw, 1.1rem);
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  /* Story */
+  .about__story {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto clamp(3.5rem, 7vw, 6rem);
+    padding-bottom: clamp(3.5rem, 7vw, 6rem);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
+  .about__story-label {
+    display: flex;
+    flex-direction: column;
+    line-height: 0.88;
+    letter-spacing: -0.045em;
+    font-weight: 800;
+    font-size: clamp(5rem, 10vw, 9.5rem);
+    user-select: none;
+  }
+
+  .about__story-word {
+    color: #fff;
+  }
+
+  .about__story-word--muted {
+    color: rgba(255, 255, 255, 0.12);
+  }
+
+  .about__story-p {
+    margin: 0;
+    font-size: clamp(1rem, 1.3vw, 1.1rem);
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  .about__story-p--lead {
+    font-size: clamp(1.15rem, 1.6vw, 1.35rem);
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.88);
+    margin-bottom: 1.25rem;
+  }
+
+  /* Value cards */
+  .about__values {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .about__card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: clamp(1.75rem, 3vw, 2.5rem);
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    transition: background-color 200ms ease, border-color 200ms ease;
+  }
+
+  .about__card:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(255, 255, 255, 0.13);
+  }
+
+  .about__card-dot {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ff4d3d;
+    box-shadow: 0 0 10px rgba(255, 77, 61, 0.55);
+  }
+
+  .about__card-heading {
+    margin: 0;
+    font-size: clamp(1.15rem, 1.8vw, 1.4rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #fff;
+  }
+
+  .about__card-body {
+    margin: 0;
+    font-size: clamp(0.9rem, 1.1vw, 1rem);
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  /* Responsive */
+  @media (max-width: 760px) {
+    .about__story {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .about__story-label {
+      font-size: clamp(4rem, 16vw, 7rem);
+      flex-direction: row;
+      gap: 0.4em;
+      line-height: 1;
+    }
+
+    .about__story-word--muted {
+      color: rgba(255, 255, 255, 0.25);
+    }
+
+    .about__values {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
