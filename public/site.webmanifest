@@ -1,0 +1,23 @@
+{
+  "name": "Sonic Window Cleaning",
+  "short_name": "Sonic",
+  "description": "Professional window, gutter, siding and pressure washing in Saskatoon and 25+ surrounding communities.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#0b1230",
+  "theme_color": "#0b1230",
+  "lang": "en-CA",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.ico",
+      "type": "image/x-icon",
+      "sizes": "32x32"
+    }
+  ]
+}
