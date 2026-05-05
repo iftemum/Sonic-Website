@@ -1,0 +1,369 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  image?: string;
+  noindex?: boolean;
+}
+
+const {
+  title = 'Window Cleaning Saskatoon | Sonic Window Cleaning — Free Quotes',
+  description = 'Top-rated window, gutter, siding & pressure washing in Saskatoon, Warman, Martensville, Osler, Dalmeny and 25+ surrounding communities. Free quotes within hours. Locally owned, fully insured, 250+ happy customers since 2020.',
+  canonical = Astro.url.href,
+  image = '/og-image.jpg',
+  noindex = false,
+} = Astro.props;
+
+const siteName = 'Sonic Window Cleaning';
+const siteUrl = (Astro.site ?? new URL('/', Astro.url)).origin;
+const ogImage = new URL(image, Astro.site ?? Astro.url).href;
+const canonicalUrl = canonical.replace(/\/$/, '') || siteUrl;
+
+const businessDescription =
+  'Top-rated window, gutter, siding and pressure-washing serving Saskatoon and 25+ surrounding communities. Locally owned, fully insured, 250+ happy customers since 2020.';
+
+const serviceAreas = [
+  'Saskatoon',
+  'Warman',
+  'Martensville',
+  'Osler',
+  'Dalmeny',
+  'Langham',
+  'Delisle',
+  'Vanscoy',
+  'Clavet',
+  'Dundurn',
+  'Aberdeen',
+  'Allan',
+  'Asquith',
+  'Borden',
+  'Bradwell',
+  'Colonsay',
+  'Cudworth',
+  'Duck Lake',
+  'Hague',
+  'Hanley',
+  'Hepburn',
+  'Kenaston',
+  'Radisson',
+  'Rosthern',
+  'Viscount',
+  'Wakaw',
+  'Waldheim',
+];
+
+const businessSchema = {
+  '@context': 'https://schema.org',
+  '@type': ['LocalBusiness', 'HomeAndConstructionBusiness'],
+  '@id': `${siteUrl}/#business`,
+  name: siteName,
+  alternateName: 'Soniiic Window Cleaning',
+  legalName: 'Soniiic Window Cleaning & Property Management',
+  image: ogImage,
+  logo: `${siteUrl}/favicon.svg`,
+  description: businessDescription,
+  url: siteUrl,
+  telephone: '+1-306-381-7113',
+  email: 'Soniiicboys@gmail.com',
+  priceRange: '$$',
+  foundingDate: '2020',
+  slogan: 'Crystal Clear Exteriors.',
+  currenciesAccepted: 'CAD',
+  paymentAccepted: 'Cash, Credit Card, E-Transfer',
+  areaServed: [
+    ...serviceAreas.map((name) => ({
+      '@type': 'City',
+      name,
+      address: { '@type': 'PostalAddress', addressRegion: 'SK', addressCountry: 'CA' },
+    })),
+    { '@type': 'AdministrativeArea', name: 'Saskatchewan' },
+  ],
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Saskatoon',
+    addressRegion: 'SK',
+    addressCountry: 'CA',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 52.1332,
+    longitude: -106.67,
+  },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+      opens: '08:00',
+      closes: '20:00',
+    },
+  ],
+  sameAs: [
+    'https://www.facebook.com/profile.php?id=61561978381555',
+    'https://www.instagram.com/soniiicwindowcleaning/',
+  ],
+  serviceType: [
+    'Window Cleaning',
+    'Gutter Cleaning',
+    'Siding Cleaning',
+    'Pressure Washing',
+    'Driveway Cleaning',
+    'Eavestrough Cleaning',
+    'Soft Wash',
+  ],
+  knowsAbout: [
+    'Residential window cleaning',
+    'Commercial window cleaning',
+    'Purified-water pole washing',
+    'Hard-water stain removal',
+    'Eavestrough cleaning',
+    'Soft wash siding',
+    'Pressure washing',
+  ],
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Exterior Cleaning Services',
+    itemListElement: [
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Window Cleaning',
+          description:
+            'Streak-free interior and exterior window cleaning with purified-water pole systems.',
+          areaServed: 'Saskatoon, SK',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Gutter Cleaning',
+          description:
+            'Hand-cleared gutters and downspouts, flushed and tested for proper drainage.',
+          areaServed: 'Saskatoon, SK',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Siding Cleaning',
+          description:
+            'Soft-wash cleaning for vinyl, stucco, brick and Hardie siding — removes dust and grime.',
+          areaServed: 'Saskatoon, SK',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Pressure Washing',
+          description:
+            'Driveway, patio, deck and sidewalk pressure washing with adjustable, surface-safe pressure.',
+          areaServed: 'Saskatoon, SK',
+        },
+      },
+    ],
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '5.0',
+    reviewCount: '4',
+    bestRating: '5',
+    worstRating: '1',
+  },
+  review: [
+    {
+      '@type': 'Review',
+      author: { '@type': 'Person', name: 'Susan S.' },
+      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
+      reviewBody:
+        "Took a chance on having Liam do our windows and I'm pretty happy with the job his company did. His purified water cleaning system was as good as promised. Excellent service.",
+    },
+    {
+      '@type': 'Review',
+      author: { '@type': 'Person', name: 'Maureen M.' },
+      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
+      reviewBody:
+        "Had our windows done by these young men for the second season and couldn't be happier. Quick, thorough and meticulous in their workmanship.",
+    },
+  ],
+};
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${siteUrl}/#website`,
+  url: siteUrl,
+  name: siteName,
+  publisher: { '@id': `${siteUrl}/#business` },
+  inLanguage: 'en-CA',
+};
+---
+
+<!doctype html>
+<html lang="en-CA">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#0b1230" />
+    <meta name="format-detection" content="telephone=yes" />
+    <meta name="color-scheme" content="dark light" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={siteName} />
+    <meta
+      name="keywords"
+      content={`window cleaning Saskatoon, window washers Saskatoon, gutter cleaning Saskatoon, eavestrough cleaning, pressure washing Saskatoon, siding cleaning, exterior cleaning, ${serviceAreas.join(', ')}`}
+    />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta
+      name="robots"
+      content={noindex
+        ? 'noindex, nofollow'
+        : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'}
+    />
+    <meta name="googlebot" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
+
+    <meta name="geo.region" content="CA-SK" />
+    <meta name="geo.placename" content="Saskatoon" />
+    <meta name="geo.position" content="52.1332;-106.6700" />
+    <meta name="ICBM" content="52.1332, -106.6700" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${siteName} — Crystal Clear Exteriors`} />
+    <meta property="og:locale" content="en_CA" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={`${siteName} — Crystal Clear Exteriors`} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <link
+      rel="preconnect"
+      href="https://pub-bb295725be3b4a64b076d16af5179956.r2.dev"
+      crossorigin
+    />
+    <link
+      rel="dns-prefetch"
+      href="https://pub-bb295725be3b4a64b076d16af5179956.r2.dev"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    />
+
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(businessSchema)}
+    />
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(websiteSchema)}
+    />
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <main id="main">
+      <slot />
+    </main>
+  </body>
+</html>
+
+<style is:global>
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+    background: #0b1230;
+    color: #fff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    font-family:
+      'Inter',
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      'Segoe UI',
+      Roboto,
+      Helvetica,
+      Arial,
+      sans-serif;
+    text-rendering: optimizeLegibility;
+  }
+
+  img,
+  video {
+    max-width: 100%;
+    display: block;
+  }
+
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    background: #fff;
+    color: #0b1230;
+    padding: 0.75rem 1rem;
+    border-radius: 0 0 8px 0;
+    z-index: 100;
+  }
+
+  .skip-link:focus {
+    left: 0;
+  }
+
+  :focus-visible {
+    outline: 2px solid #ff5a47;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+</style>

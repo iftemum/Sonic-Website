@@ -1,0 +1,242 @@
+---
+const faqs = [
+  {
+    q: 'How much does window cleaning cost in Saskatoon?',
+    a: 'Most Saskatoon homes fall between $150 and $400 depending on the number of windows, height, and whether you want interior, exterior, or both. We give a free transparent quote within a few hours — call 306-381-7113, email Soniiicboys@gmail.com, or use the form on this page.',
+  },
+  {
+    q: 'Do you clean windows year-round in Saskatchewan?',
+    a: 'Yes. We run window cleaning from spring through late fall, and continue interior window cleaning, gutter clean-outs, and commercial work through the winter when conditions allow. Spring and fall are our busiest seasons — book ahead for those.',
+  },
+  {
+    q: 'What towns do you service around Saskatoon?',
+    a: 'We service Saskatoon and 25+ surrounding communities including Warman, Martensville, Osler, Dalmeny, Langham, Delisle, Vanscoy, Clavet, Dundurn, Aberdeen, Allan, Asquith, Borden, Bradwell, Colonsay, Cudworth, Duck Lake, Hague, Hanley, Hepburn, Kenaston, Radisson, Rosthern, Viscount, Wakaw, and Waldheim. If you are within an hour of the city, just ask.',
+  },
+  {
+    q: 'Are you insured?',
+    a: 'Yes — Sonic Window Cleaning is fully insured for residential and commercial work across Saskatchewan, and we follow safe-work practices on every job to protect your home and our crew.',
+  },
+  {
+    q: 'Do you clean both interior and exterior windows?',
+    a: 'Yes. We do interior, exterior, or both. We hand-wash screens, wipe tracks and sills, and treat hard-water staining on exterior glass when needed.',
+  },
+  {
+    q: 'How long does a typical window cleaning take?',
+    a: 'A typical Saskatoon home (10–20 windows) takes 1.5–3 hours. Larger homes or homes with extensive screens, tracks, and skylights can take longer. We confirm a time window when we book.',
+  },
+  {
+    q: 'Do you clean gutters and eavestroughs as well?',
+    a: 'Yes. We hand-clear leaves and debris from gutters, flush downspouts to verify drainage, wipe down the gutter exteriors, and can send a photo report on request. Pairs well with a fall window clean.',
+  },
+  {
+    q: 'How do I get a free quote?',
+    a: 'Fill out the quote form below with your address, services needed, and (optionally) a couple of photos. You can also call or text 306-381-7113. Most quotes go back within a few hours during business hours.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: f.a,
+    },
+  })),
+};
+---
+
+<section id="faq" class="faq" aria-labelledby="faq-heading">
+  <div class="faq__head">
+    <p class="faq__eyebrow">
+      <span class="faq__dot" aria-hidden="true"></span>
+      Frequently asked
+    </p>
+    <h2 id="faq-heading" class="faq__heading">
+      Quick answers <span class="faq__heading-accent">before you book.</span>
+    </h2>
+    <p class="faq__lede">
+      Everything Saskatoon homeowners ask us most often — pricing, scheduling,
+      service area, and how we work.
+    </p>
+  </div>
+
+  <ul class="faq__list" role="list">
+    {faqs.map((f, i) => (
+      <li class="faq__item">
+        <details name="faq" open={i === 0}>
+          <summary>
+            <span class="faq__q">{f.q}</span>
+            <span class="faq__chev" aria-hidden="true">
+              <svg viewBox="0 0 16 16" width="14" height="14" fill="none">
+                <path
+                  d="M4 6l4 4 4-4"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </svg>
+            </span>
+          </summary>
+          <p class="faq__a">{f.a}</p>
+        </details>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<script
+  is:inline
+  type="application/ld+json"
+  set:html={JSON.stringify(faqSchema)}
+/>
+
+<style>
+  .faq {
+    background: #f6f7fb;
+    color: #0a0f24;
+    padding: clamp(4rem, 9vw, 7.5rem) clamp(1.5rem, 5vw, 4rem);
+    font-family:
+      'Inter',
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      sans-serif;
+  }
+
+  .faq__head {
+    max-width: 56rem;
+    margin: 0 auto clamp(2.5rem, 5vw, 4rem);
+    text-align: center;
+  }
+
+  .faq__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin: 0 0 1.25rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #5b6584;
+  }
+
+  .faq__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: #ff4d3d;
+    box-shadow: 0 0 12px rgba(255, 77, 61, 0.6);
+  }
+
+  .faq__heading {
+    margin: 0 0 1.25rem;
+    font-size: clamp(2rem, 5.4vw, 3.75rem);
+    line-height: 1;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #0b1230;
+  }
+
+  .faq__heading-accent {
+    background: linear-gradient(180deg, #ff5a47 0%, #d6321f 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .faq__lede {
+    margin: 0 auto;
+    max-width: 42rem;
+    font-size: clamp(1rem, 1.2vw, 1.1rem);
+    line-height: 1.6;
+    color: #5b6584;
+  }
+
+  .faq__list {
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    max-width: 820px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .faq__item {
+    background: #fff;
+    border: 1px solid rgba(11, 18, 48, 0.08);
+    border-radius: 16px;
+    overflow: hidden;
+    transition:
+      box-shadow 200ms ease,
+      border-color 200ms ease;
+  }
+
+  .faq__item:hover {
+    border-color: rgba(11, 18, 48, 0.16);
+    box-shadow: 0 12px 30px -20px rgba(11, 18, 48, 0.18);
+  }
+
+  .faq__item details summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 1.15rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    font-weight: 600;
+    font-size: clamp(0.98rem, 1.2vw, 1.08rem);
+    color: #0b1230;
+  }
+
+  .faq__item details summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__item details[open] summary {
+    border-bottom: 1px solid rgba(11, 18, 48, 0.06);
+  }
+
+  .faq__q {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .faq__chev {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    background: #f0f3fb;
+    color: #2952ff;
+    flex-shrink: 0;
+    transition: transform 200ms ease;
+  }
+
+  .faq__item details[open] .faq__chev {
+    transform: rotate(180deg);
+  }
+
+  .faq__a {
+    margin: 0;
+    padding: 1rem 1.5rem 1.4rem;
+    font-size: 0.98rem;
+    line-height: 1.7;
+    color: #2f3952;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .faq__chev,
+    .faq__item {
+      transition: none;
+    }
+  }
+</style>

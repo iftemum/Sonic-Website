@@ -1,0 +1,690 @@
+---
+const services = [
+  'Window cleaning',
+  'Gutter cleaning',
+  'Siding cleaning',
+  'Driveway pressure wash',
+];
+
+const homeSizes = [
+  'Small (1-10 windows)',
+  'Medium (11-20 windows)',
+  'Large (21-35 windows)',
+  'Extra large (36+ windows)',
+  'Not sure',
+];
+---
+
+<section id="quote" class="quote" aria-label="Get a quote">
+  <div class="quote__inner">
+    <aside class="quote__intro">
+      <p class="quote__eyebrow">Get a quote</p>
+      <h2 class="quote__title">Free, fast, no obligation.</h2>
+      <p class="quote__lede">
+        Send us a few details — and a couple photos if you have them — and
+        we'll get a transparent quote back to you within a few hours.
+      </p>
+
+      <div class="quote__contacts">
+        <a href="tel:+13063817113" class="quote__contact">
+          <span class="quote__contact-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </span>
+          <span class="quote__contact-body">
+            <span class="quote__contact-label">Call or text</span>
+            <span class="quote__contact-value">306-381-7113</span>
+          </span>
+        </a>
+
+        <a href="mailto:Soniiicboys@gmail.com" class="quote__contact">
+          <span class="quote__contact-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          </span>
+          <span class="quote__contact-body">
+            <span class="quote__contact-label">Email</span>
+            <span class="quote__contact-value">Soniiicboys@gmail.com</span>
+          </span>
+        </a>
+      </div>
+    </aside>
+
+    <form class="quote__form" id="quote-form" novalidate>
+      <div class="quote__row">
+        <div class="quote__field">
+          <label for="q-phone">Phone</label>
+          <input
+            id="q-phone"
+            name="phone"
+            type="tel"
+            required
+            autocomplete="tel"
+            placeholder="306-381-7113"
+          />
+        </div>
+        <div class="quote__field">
+          <label for="q-email">Email</label>
+          <input
+            id="q-email"
+            name="email"
+            type="email"
+            required
+            autocomplete="email"
+            placeholder="you@email.com"
+          />
+        </div>
+      </div>
+
+      <div class="quote__field">
+        <label for="q-address">Address / Town</label>
+        <input
+          id="q-address"
+          name="address"
+          type="text"
+          required
+          autocomplete="street-address"
+          placeholder="123 Main St, Saskatoon"
+        />
+      </div>
+
+      <fieldset class="quote__field quote__field--pills">
+        <legend>Services needed</legend>
+        <div class="quote__pills" role="group">
+          {services.map((service) => (
+            <label class="quote__pill">
+              <input type="checkbox" name="services" value={service} />
+              <span>{service}</span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
+      <div class="quote__row">
+        <div class="quote__field">
+          <label for="q-size">Home size / # of windows</label>
+          <div class="quote__select-wrap">
+            <select id="q-size" name="homeSize">
+              <option value="">Select...</option>
+              {homeSizes.map((s) => <option value={s}>{s}</option>)}
+            </select>
+          </div>
+        </div>
+        <div class="quote__field">
+          <label for="q-date">Preferred date</label>
+          <input id="q-date" name="preferredDate" type="date" />
+        </div>
+      </div>
+
+      <div class="quote__field">
+        <span class="quote__label">Photos (optional, faster quote)</span>
+        <label class="quote__drop" id="q-drop" for="q-photos">
+          <span class="quote__drop-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          </span>
+          <span class="quote__drop-title">Drop photos here, or click to upload</span>
+          <span class="quote__drop-meta">JPG/PNG · up to 8 photos · helps us quote faster</span>
+          <input
+            id="q-photos"
+            name="photos"
+            type="file"
+            accept="image/jpeg,image/png"
+            multiple
+            hidden
+          />
+        </label>
+        <ul class="quote__filelist" id="q-filelist" hidden></ul>
+      </div>
+
+      <div class="quote__field">
+        <label for="q-notes">Notes</label>
+        <textarea
+          id="q-notes"
+          name="notes"
+          rows="4"
+          placeholder="Anything we should know? (gate codes, hard-to-reach windows, deadlines...)"
+        ></textarea>
+      </div>
+
+      <p class="quote__error" id="q-error" hidden></p>
+
+      <button type="submit" class="quote__submit" id="q-submit">
+        <span class="quote__submit-label">Send quote request</span>
+        <span class="quote__submit-icon" aria-hidden="true">→</span>
+      </button>
+    </form>
+
+    <div class="quote__success" id="quote-success" hidden>
+      <div class="quote__success-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+      </div>
+      <h3>Thanks!</h3>
+      <p>We'll get back to you within a few hours.</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('quote-form') as HTMLFormElement | null;
+  const fileInput = document.getElementById('q-photos') as HTMLInputElement | null;
+  const drop = document.getElementById('q-drop') as HTMLLabelElement | null;
+  const fileList = document.getElementById('q-filelist') as HTMLUListElement | null;
+  const errorEl = document.getElementById('q-error') as HTMLParagraphElement | null;
+  const submitBtn = document.getElementById('q-submit') as HTMLButtonElement | null;
+  const successEl = document.getElementById('quote-success') as HTMLDivElement | null;
+
+  const MAX_PHOTOS = 8;
+
+  const renderFiles = () => {
+    if (!fileInput || !fileList) return;
+    const files = Array.from(fileInput.files ?? []);
+    fileList.innerHTML = '';
+    if (files.length === 0) {
+      fileList.hidden = true;
+      return;
+    }
+    fileList.hidden = false;
+    for (const f of files) {
+      const li = document.createElement('li');
+      li.textContent = `${f.name} · ${(f.size / 1024).toFixed(0)} KB`;
+      fileList.appendChild(li);
+    }
+  };
+
+  const setFiles = (incoming: FileList | File[]) => {
+    if (!fileInput) return;
+    const dt = new DataTransfer();
+    const arr = Array.from(incoming)
+      .filter((f) => /image\/(jpeg|png)/.test(f.type))
+      .slice(0, MAX_PHOTOS);
+    for (const f of arr) dt.items.add(f);
+    fileInput.files = dt.files;
+    renderFiles();
+  };
+
+  fileInput?.addEventListener('change', () => {
+    if (fileInput.files && fileInput.files.length > MAX_PHOTOS) {
+      setFiles(fileInput.files);
+    } else {
+      renderFiles();
+    }
+  });
+
+  if (drop) {
+    ['dragenter', 'dragover'].forEach((evt) =>
+      drop.addEventListener(evt, (e) => {
+        e.preventDefault();
+        drop.classList.add('is-dragging');
+      }),
+    );
+    ['dragleave', 'drop'].forEach((evt) =>
+      drop.addEventListener(evt, (e) => {
+        e.preventDefault();
+        drop.classList.remove('is-dragging');
+      }),
+    );
+    drop.addEventListener('drop', (e) => {
+      const dropEvent = e as DragEvent;
+      if (dropEvent.dataTransfer?.files) {
+        setFiles(dropEvent.dataTransfer.files);
+      }
+    });
+  }
+
+  const showError = (msg: string) => {
+    if (!errorEl) return;
+    errorEl.textContent = msg;
+    errorEl.hidden = false;
+  };
+
+  const clearError = () => {
+    if (!errorEl) return;
+    errorEl.textContent = '';
+    errorEl.hidden = true;
+  };
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    clearError();
+
+    const fd = new FormData(form);
+    const phone = String(fd.get('phone') ?? '').trim();
+    const email = String(fd.get('email') ?? '').trim();
+    const address = String(fd.get('address') ?? '').trim();
+
+    if (!phone || !email || !address) {
+      showError('Please fill in phone, email, and address before sending.');
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showError('That email address doesn’t look right.');
+      return;
+    }
+
+    if (!submitBtn) return;
+    submitBtn.disabled = true;
+    submitBtn.classList.add('is-loading');
+    const originalLabel = submitBtn.querySelector('.quote__submit-label');
+    if (originalLabel) originalLabel.textContent = 'Sending...';
+
+    try {
+      const res = await fetch('/api/quote', { method: 'POST', body: fd });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.ok) {
+        throw new Error(data.error || 'Something went wrong sending your request.');
+      }
+      if (form && successEl) {
+        form.hidden = true;
+        successEl.hidden = false;
+      }
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : 'Something went wrong.';
+      showError(msg);
+      submitBtn.disabled = false;
+      submitBtn.classList.remove('is-loading');
+      if (originalLabel) originalLabel.textContent = 'Send quote request';
+    }
+  });
+</script>
+
+<style>
+  .quote {
+    background: #f5f6fa;
+    padding: clamp(3rem, 7vw, 6rem) clamp(1rem, 4vw, 3rem);
+    color: #0b1230;
+    font-family:
+      'Inter',
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      sans-serif;
+  }
+
+  .quote__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+    gap: 0;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px -40px rgba(11, 18, 48, 0.35);
+    background: #fff;
+    position: relative;
+  }
+
+  .quote__intro {
+    background:
+      radial-gradient(120% 80% at 0% 0%, rgba(255, 90, 71, 0.18) 0%, rgba(255, 90, 71, 0) 55%),
+      linear-gradient(180deg, #0b1230 0%, #111a44 100%);
+    color: #fff;
+    padding: clamp(2.25rem, 4vw, 3.25rem);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    min-height: 100%;
+  }
+
+  .quote__eyebrow {
+    margin: 0;
+    font-size: 0.78rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.65);
+    font-weight: 500;
+  }
+
+  .quote__title {
+    margin: 0;
+    font-size: clamp(2.25rem, 4vw, 3.25rem);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    font-weight: 800;
+  }
+
+  .quote__lede {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.78);
+    max-width: 32ch;
+  }
+
+  .quote__contacts {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding-top: 2.5rem;
+  }
+
+  .quote__contact {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.15rem;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    text-decoration: none;
+    transition:
+      background-color 160ms ease,
+      transform 160ms ease;
+  }
+
+  .quote__contact:hover,
+  .quote__contact:focus-visible {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
+  }
+
+  .quote__contact-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .quote__contact-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    min-width: 0;
+  }
+
+  .quote__contact-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .quote__contact-value {
+    font-size: 0.95rem;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .quote__form {
+    background: #fff;
+    padding: clamp(2.25rem, 4vw, 3.25rem);
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+  }
+
+  .quote__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .quote__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 0;
+  }
+
+  .quote__field label,
+  .quote__field legend,
+  .quote__label {
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #2952ff;
+    padding: 0;
+  }
+
+  .quote__field input[type='tel'],
+  .quote__field input[type='email'],
+  .quote__field input[type='text'],
+  .quote__field input[type='date'],
+  .quote__field select,
+  .quote__field textarea {
+    width: 100%;
+    border: 1px solid #e1e5ef;
+    border-radius: 12px;
+    padding: 0.85rem 1rem;
+    font-size: 1rem;
+    font-family: inherit;
+    color: #0b1230;
+    background: #fff;
+    transition:
+      border-color 160ms ease,
+      box-shadow 160ms ease;
+  }
+
+  .quote__field textarea {
+    resize: vertical;
+    min-height: 110px;
+  }
+
+  .quote__field input:focus,
+  .quote__field select:focus,
+  .quote__field textarea:focus {
+    outline: none;
+    border-color: #2952ff;
+    box-shadow: 0 0 0 4px rgba(41, 82, 255, 0.12);
+  }
+
+  .quote__select-wrap {
+    position: relative;
+  }
+
+  .quote__select-wrap::after {
+    content: '';
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid #6b7280;
+    border-bottom: 2px solid #6b7280;
+    transform: translateY(-70%) rotate(45deg);
+    pointer-events: none;
+  }
+
+  .quote__select-wrap select {
+    appearance: none;
+    -webkit-appearance: none;
+    padding-right: 2.5rem;
+  }
+
+  .quote__field--pills {
+    border: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  .quote__pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .quote__pill {
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .quote__pill input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .quote__pill span {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.6rem 1.1rem;
+    border-radius: 999px;
+    border: 1px solid #e1e5ef;
+    background: #fff;
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: #0b1230;
+    transition:
+      background-color 160ms ease,
+      border-color 160ms ease,
+      color 160ms ease;
+  }
+
+  .quote__pill:hover span {
+    border-color: #2952ff;
+  }
+
+  .quote__pill input:checked + span {
+    background: #0b1230;
+    border-color: #0b1230;
+    color: #fff;
+  }
+
+  .quote__pill input:focus-visible + span {
+    outline: 2px solid #2952ff;
+    outline-offset: 2px;
+  }
+
+  .quote__drop {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 2rem 1rem;
+    border-radius: 14px;
+    border: 2px dashed #c8d0e4;
+    background: #f0f3fb;
+    color: #0b1230;
+    cursor: pointer;
+    text-align: center;
+    transition:
+      background-color 160ms ease,
+      border-color 160ms ease;
+  }
+
+  .quote__drop:hover,
+  .quote__drop.is-dragging {
+    border-color: #2952ff;
+    background: #e8edff;
+  }
+
+  .quote__drop-icon {
+    color: #2952ff;
+  }
+
+  .quote__drop-title {
+    font-weight: 600;
+    font-size: 0.98rem;
+  }
+
+  .quote__drop-meta {
+    font-size: 0.82rem;
+    color: #6b7280;
+  }
+
+  .quote__filelist {
+    list-style: none;
+    margin: 0.5rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    font-size: 0.85rem;
+    color: #4b5563;
+  }
+
+  .quote__error {
+    margin: 0;
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    background: #fff1f0;
+    color: #b42318;
+    font-size: 0.9rem;
+    border: 1px solid #fee2df;
+  }
+
+  .quote__submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 1.05rem 1.5rem;
+    border-radius: 14px;
+    border: 0;
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(180deg, #ff5a47 0%, #e83a26 100%);
+    cursor: pointer;
+    box-shadow: 0 14px 30px -14px rgba(232, 58, 38, 0.55);
+    transition:
+      transform 160ms ease,
+      box-shadow 160ms ease,
+      opacity 160ms ease;
+  }
+
+  .quote__submit:hover:not(:disabled),
+  .quote__submit:focus-visible:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 34px -14px rgba(232, 58, 38, 0.7);
+  }
+
+  .quote__submit:disabled {
+    opacity: 0.7;
+    cursor: progress;
+  }
+
+  .quote__submit.is-loading .quote__submit-icon {
+    display: none;
+  }
+
+  .quote__success {
+    grid-column: 1 / -1;
+    padding: clamp(2.5rem, 6vw, 4rem);
+    text-align: center;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .quote__success-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #e6f7ec;
+    color: #1b7f3a;
+    margin-bottom: 0.5rem;
+  }
+
+  .quote__success h3 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+
+  .quote__success p {
+    margin: 0;
+    color: #4b5563;
+  }
+
+  @media (max-width: 900px) {
+    .quote__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .quote__row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
