@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 
+import cloudflare from '@astrojs/cloudflare';
 import sitemap from '@astrojs/sitemap';
 
 // Production URL — used for canonical URLs, OG images, and sitemap.
@@ -19,6 +20,7 @@ export default defineConfig({
     inlineStylesheets: 'auto',
   },
   compressHTML: true,
+  adapter: cloudflare(),
   integrations: [
     sitemap({
       changefreq: 'monthly',
