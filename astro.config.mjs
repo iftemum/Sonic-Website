@@ -6,7 +6,7 @@ import sitemap from '@astrojs/sitemap';
 
 // Production URL — used for canonical URLs, OG images, and sitemap.
 // Update this when the final domain is registered.
-const SITE_URL = process.env.SITE_URL || 'https://sonicwindowcleaning.ca';
+const SITE_URL = process.env.SITE_URL || 'soniiicwindowcleaning.com';
 
 // https://astro.build/config
 export default defineConfig({
